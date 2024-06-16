@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Country, State, City } from "country-state-city";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Country, City } from "country-state-city";
 import "./App.css";
 
 function App() {
