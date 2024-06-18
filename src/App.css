@@ -37,6 +37,7 @@ img {
   width: 95%;
   max-width: 1000px;
   margin: 0 auto;
+  padding: 1em 0;
 }
 
 .not-visible {
@@ -166,10 +167,11 @@ nav {
 }
 
 .input-box {
-  /* background-color: blue; */
+  background-color: rgb(42, 41, 41);
   position: fixed;
   width: 100%;
   top: 0;
+  padding: 1.5em 0;
 }
 
 .country-input,
@@ -186,7 +188,7 @@ nav {
 
 .name-suggestions {
   /* background-color: brown; */
-  padding-top: 7em;
+  padding-top: 9em;
 }
 
 .country-name-list,
@@ -210,9 +212,13 @@ nav {
 }
 
 .details-box {
-  /* background-color: brown; */
+  background-color: rgb(74, 108, 143);
+  color: white;
+  width: 97%;
+  margin: 0 auto;
   display: flex;
   padding: 1em 0;
+  border-radius: 20px;
 }
 
 .details {
@@ -263,11 +269,21 @@ nav {
     height: fit-content;
     min-height: 60vh;
     margin-top: 15vh;
+    border-radius: 20px;
   }
 
   .main {
     width: 60%;
     /* background-color: red; */
+  }
+
+  .main-box {
+    background-color: rgb(42, 41, 41);
+    color: white;
+    width: 95%;
+    margin: 1em auto;
+    padding: .2em .5em;
+    border-radius: 20px;
   }
 
   .temperature {
@@ -276,7 +292,7 @@ nav {
 
   .condition {
     width: 45%;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     justify-content: center;
   }
 
@@ -290,6 +306,7 @@ nav {
   }
 
   .search-box {
+    background-color: steelblue;
     position: relative;
     min-height: auto;
     width: auto;
@@ -299,14 +316,21 @@ nav {
   }
 
   .input-box {
+    background-color: rgb(42, 41, 41);
     position: relative;
     top: 0;
+    width: 90%;
+    padding: 2em 0;
+    margin: 1em auto;
+    border-radius: 20px;
   }
 
   .name-suggestions {
-    padding-top: 0;
     position: absolute;
     top: 6.5em;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 0;
     background-color: black;
   }
 
@@ -315,7 +339,14 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 50vh;
+    max-height: 40vh;
     overflow-y: scroll;
-}
+  }
+
+  .details-box {
+    background-color: rgb(42, 41, 41);
+    color: white;
+    width: 90%;
+    margin: 0 auto;
+  }
 }

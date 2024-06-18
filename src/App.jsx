@@ -77,77 +77,86 @@ function App() {
   return (
     <>
       <div className="container">
-        <div className="main" style={Data ? null : { visibility: "hidden" }}>
-          <nav>
-            <div className="navbar">
-              <div className="loc-details">
-                <h1 className="location">
-                  {Data ? Data.location.name : "Location"}
-                </h1>
-                <p className="last-updated">
-                  last updated: {updateTime}
-                </p>
-              </div>
-              <div
-                className="search-btn"
-                onClick={() => {
-                  setShow(!show);
-                }}
-              >
-                <img src="https://w7.pngwing.com/pngs/851/233/png-transparent-computer-icons-search-box-button-search-button-text-internet-interface-thumbnail.png"></img>
-              </div>
+        <div className="main">
+          <div className="main-box">
+            <div
+              className="loading-page"
+              style={Data ? { display: "none" } : null}
+            >
+              <h3>Select city and location to display weather data.</h3>
             </div>
-          </nav>
-          <section className="main-details">
-            <div className="temperature">
-              <div className="current">
-                <h2 className="current-temp">
-                  {Data ? Data.current.temp_c : ""}
-                  <span className="span-temp-unit">°C</span>
-                </h2>
-                {/* <p className="current-temp-units">°C</p> */}
+            <nav style={Data ? null : { visibility: "hidden" }}>
+              <div className="navbar">
+                <div className="loc-details">
+                  <h1 className="location">
+                    {Data ? Data.location.name : "Location"}
+                  </h1>
+                  <p className="last-updated">last updated: {updateTime}</p>
+                </div>
+                <div
+                  className="search-btn"
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                >
+                  <img src="https://w7.pngwing.com/pngs/851/233/png-transparent-computer-icons-search-box-button-search-button-text-internet-interface-thumbnail.png"></img>
+                </div>
               </div>
-              <div className="feelslike">
-                <h3 className="feels-like-temp">
-                  feels like: {Data ? Data.current.feelslike_c : ""}
-                  <span className="span-feels-unit">°C</span>
-                </h3>
-                {/* <p className="feelslike-temp-units">°C</p> */}
+            </nav>
+            <section
+              className="main-details"
+              style={Data ? null : { visibility: "hidden" }}
+            >
+              <div className="temperature">
+                <div className="current">
+                  <h2 className="current-temp">
+                    {Data ? Data.current.temp_c : ""}
+                    <span className="span-temp-unit">°C</span>
+                  </h2>
+                  {/* <p className="current-temp-units">°C</p> */}
+                </div>
+                <div className="feelslike">
+                  <h3 className="feels-like-temp">
+                    feels like: {Data ? Data.current.feelslike_c : ""}
+                    <span className="span-feels-unit">°C</span>
+                  </h3>
+                  {/* <p className="feelslike-temp-units">°C</p> */}
+                </div>
               </div>
-            </div>
-            <div className="condition">
-              <div className="icon-div">
-                <img src={Data ? Data.current.condition.icon : ""}></img>
+              <div className="condition">
+                <div className="icon-div">
+                  <img src={Data ? Data.current.condition.icon : ""}></img>
+                </div>
+                <h4 className="condition-type">
+                  {Data ? Data.current.condition.text : ""}
+                </h4>
               </div>
-              <h4 className="condition-type">
-                {Data ? Data.current.condition.text : ""}
-              </h4>
-            </div>
-          </section>
-          <section className="main-forecast">
-            <h3 className="forecast-day">Hourly forecast</h3>
-            <div className="forecast">
-              {forecast
-                ? forecast.map((hour, index) => {
-                    return (
-                      <div
-                      key={index}
-                        className="hour-card"
-                      >
-                        <p>{hour.time.split(" ")[1]}</p>
-                        <div style={{ height: "40px", width: "40px" }}>
-                          <img
-                            src={hour.condition.icon}
-                            style={{ height: "100%" }}
-                          ></img>
+            </section>
+            <section
+              className="main-forecast"
+              style={Data ? null : { visibility: "hidden" }}
+            >
+              <h3 className="forecast-day">Hourly forecast</h3>
+              <div className="forecast">
+                {forecast
+                  ? forecast.map((hour, index) => {
+                      return (
+                        <div key={index} className="hour-card">
+                          <p>{hour.time.split(" ")[1]}</p>
+                          <div style={{ height: "40px", width: "40px" }}>
+                            <img
+                              src={hour.condition.icon}
+                              style={{ height: "100%" }}
+                            ></img>
+                          </div>
+                          <p>{hour.temp_c}°C</p>
                         </div>
-                        <p>{hour.temp_c}°C</p>
-                      </div>
-                    );
-                  })
-                : ""}
-            </div>
-          </section>
+                      );
+                    })
+                  : ""}
+              </div>
+            </section>
+          </div>
         </div>
         <div className="sidebar">
           <section className={show ? "search-box" : "search-box not-visible"}>
