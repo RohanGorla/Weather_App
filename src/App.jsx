@@ -13,6 +13,7 @@ function App() {
   const [country, setCountry] = useState("");
   const [Data, setData] = useState();
   const [forecast, setForecast] = useState([]);
+  const [windDir, setWindDir] = useState("");
 
   const countries = Country.getAllCountries();
   const cities = City.getAllCities();
@@ -36,6 +37,27 @@ function App() {
     let data = await response.json();
     setData(data);
     setForecast(data.forecast.forecastday[0].hour);
+    switch (data.current.wind_dir) {
+      case "N":
+        setWindDir("North");
+        break;
+  
+      case "W":
+        setWindDir("West");
+        break;
+  
+      case "E":
+        setWindDir("East");
+        break;
+  
+      case "S":
+        setWindDir("South");
+        break;
+  
+      default:
+        setWindDir(data.current.wind_dir);
+        break;
+    }
   }
 
   useEffect(() => {
@@ -83,9 +105,13 @@ function App() {
               className="loading-page"
               style={Data ? { display: "none" } : null}
             >
-              <h3>Select city and location to display weather data.</h3>
+              <h3>
+                {city
+                  ? "Loading..."
+                  : "Select city and location to display weather data."}
+              </h3>
             </div>
-            <nav style={Data ? null : { visibility: "hidden" }}>
+            <nav style={Data ? null : { display: "none" }}>
               <div className="navbar">
                 <div className="loc-details">
                   <h1 className="location">
@@ -105,7 +131,7 @@ function App() {
             </nav>
             <section
               className="main-details"
-              style={Data ? null : { visibility: "hidden" }}
+              style={Data ? null : { display: "none" }}
             >
               <div className="temperature">
                 <div className="current">
@@ -134,7 +160,7 @@ function App() {
             </section>
             <section
               className="main-forecast"
-              style={Data ? null : { visibility: "hidden" }}
+              style={Data ? null : { display: "none" }}
             >
               <h3 className="forecast-day">Hourly forecast</h3>
               <div className="forecast">
@@ -275,12 +301,59 @@ function App() {
                 </p>
               </div>
               <div className="detail-card wind">
-                <p className="detail-name">
-                  {Data ? Data.current.wind_dir : ""} wind
-                </p>
+                <p className="detail-name">{Data ? windDir : ""} wind</p>
                 <p className="detail-info">
                   {Data ? Data.current.wind_kph : ""} kmph
                 </p>
+              </div>
+            </div>
+          </section>
+          <section
+            className="details-box"
+            style={Data ? null : { display: "none" }}
+          >
+            <div className="details">
+              <div className="detail-card humidity">
+                <p className="detail-name">Max Temp</p>
+                <p className="detail-info">
+                  {Data ? Data.forecast.forecastday[0].day.maxtemp_c : ""}°C
+                </p>
+              </div>
+              <div className="detail-card pressure">
+                <p className="detail-name">Sunrise</p>
+                <p className="detail-info">
+                  {Data ? Data.forecast.forecastday[0].astro.sunrise : ""}
+                </p>
+              </div>
+              <div className="detail-card precipitation">
+                <p className="detail-name">UV Index</p>
+                <p className="detail-info">
+                  {Data
+                    ? Data.current.uv < 5
+                      ? "Low"
+                      : Data.current.uv > 8
+                      ? "High"
+                      : "Medium"
+                    : ""}
+                </p>
+              </div>
+            </div>
+            <div className="details">
+              <div className="detail-card visibility">
+                <p className="detail-name">Min Temp</p>
+                <p className="detail-info">
+                  {Data ? Data.forecast.forecastday[0].day.mintemp_c : ""}°C
+                </p>
+              </div>
+              <div className="detail-card dewpoint">
+                <p className="detail-name">Sunset</p>
+                <p className="detail-info">
+                  {Data ? Data.forecast.forecastday[0].astro.sunset : ""}
+                </p>
+              </div>
+              <div className="detail-card wind">
+                <p className="detail-name">Wind dir</p>
+                <p className="detail-info">{Data ? windDir : ""}</p>
               </div>
             </div>
           </section>
